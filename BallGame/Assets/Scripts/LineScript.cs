@@ -18,6 +18,11 @@ public class LineScript : MonoBehaviour
     {
         xDirection = Input.GetAxisRaw("Horizontal");
 
+        if (xDirection != 0)
+        {
+            Debug.Log(xDirection);
+        }
+
         float moveStep = moveSpeed * Time.deltaTime * xDirection;
 
         if ((transform.position.x < -6.7 && xDirection < 0) || (transform.position.x > 6.7 && xDirection > 0))

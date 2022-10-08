@@ -11,10 +11,14 @@ public class GameControllerScript : MonoBehaviour
     int m_score;
     bool m_isGameOver;
 
+    UIManager m_ui;
+
     private void Start()
     {
         m_spawnTime = 0; 
         m_isGameOver = false;
+        m_ui = FindObjectOfType<UIManager>();
+        m_ui.setScoreText("Score:" + m_score);
     }
 
     private void Update()
@@ -24,6 +28,7 @@ public class GameControllerScript : MonoBehaviour
         if (m_isGameOver)
         {
             m_spawnTime = 0;
+            m_ui.showGameOverPanel(true);
             return;
         }
 
@@ -33,6 +38,14 @@ public class GameControllerScript : MonoBehaviour
 
             m_spawnTime = SpawnTime;
         }
+    }
+
+    public void replay()
+    {
+        m_score = 0;
+        m_isGameOver = false;
+        m_ui.setScoreText("Score: " + m_score);
+        m_ui.showGameOverPanel(false);
     }
 
     public void SpawnBall()
@@ -54,6 +67,7 @@ public class GameControllerScript : MonoBehaviour
     public void IncreaseScore()
     {
         this.m_score++;
+        m_ui.setScoreText("Score: " + m_score.ToString());
     }
 
     public void setGameOver(bool isGO)
