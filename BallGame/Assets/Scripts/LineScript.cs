@@ -7,20 +7,25 @@ public class LineScript : MonoBehaviour
     public float moveSpeed;
     float xDirection;
 
-    // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    //Start is called before the first frame update
+    void Start()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
     {
         xDirection = Input.GetAxisRaw("Horizontal");
 
-        Debug.Log(xDirection);
-
         float moveStep = moveSpeed * Time.deltaTime * xDirection;
+
+        if ((transform.position.x < -6.7 && xDirection < 0) || (transform.position.x > 6.7 && xDirection > 0))
+        {
+            return;
+        }
+
         transform.position += new Vector3(moveStep, 0, 0);
+        
     }
 }
